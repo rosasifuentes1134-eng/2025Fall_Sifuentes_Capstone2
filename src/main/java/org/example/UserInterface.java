@@ -122,7 +122,7 @@ public class UserInterface {
         boolean toasted = scanner.nextLine().equalsIgnoreCase("yes");
 
         //Sandwich sandwich = new Sandwich();
-        //order.addItem(sandwich);
+
 
         System.out.println("Added " + size + " " + meat + " sandwich to your order.");
     }

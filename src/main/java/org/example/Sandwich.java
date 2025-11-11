@@ -6,7 +6,7 @@ import org.example.Price.BreadSizePrice;
 
 import java.util.List;
 
-public abstract class Sandwich {
+public class Sandwich {
     private BreadSize breadSize;
     private BreadType breadType;
     private List<String> meats;
@@ -94,7 +94,7 @@ public abstract class Sandwich {
 
         sauces.add(sauce);
     }
-    public double getPrice() {
+    public double calculateTotal() {
        BreadSizePrice breadSizePrice = new BreadSizePrice();
         double total = breadSizePrice.getPrice();
         total += meats.size() * 1.00;// add $1 per meat

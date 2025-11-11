@@ -58,7 +58,7 @@ public class Order {
             double total = 0.0;
             for (Object item : items) {
                 if (item instanceof Sandwich sandwich) {
-                    total += sandwich.getPrice();
+                    total += sandwich.calculateTotal();
                 } else if (item instanceof DrinkPrice drinkPrice) {
                     total += drinkPrice.getPrice();
                 } else if (item instanceof SideItemPrice sideItemPrice) {
