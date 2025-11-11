@@ -2,81 +2,82 @@ package org.example;
 
 import org.example.Enum.Drink;
 import org.example.Price.DrinkPrice;
-import org.example.Price.SideItemPrice;
+import org.example.Price.SideItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+    // These lists hold all the items in the order
+    private List<Sandwich> sandwiches;
+    private List<SideItem> sideItems;
+    private List<Drink> drinks;
 
-        private List<Object> items;  // can hold Sandwich, Drink, Chips, etc.
-        private double totalPrice;
+    // Constructor — this runs when you create a new order
+    public Order() {
+        sandwiches = new ArrayList<>();
+        sideItems = new ArrayList<>();
+        drinks = new ArrayList<>();
 
-        public Order(List<Object> items, double totalPrice) {
-            this.items = items;
-            this.totalPrice = totalPrice;
-        }
-        public Order() {
-        this.items = new ArrayList<>();
-        this.totalPrice = 0.0;
-        }
-
-        public void setItems(List<Object> items) {
-            this.items = items;
-        }
-
-        public void setTotalPrice(double totalPrice) {
-            this.totalPrice = totalPrice;
-        }
-
-        //  Add an item to the order
-        public void addItem(Object item) {
-            items.add(item);
-        }
-
-        // Remove all items (for cancel)
-        public void remove() {
-            items.remove(new Object());
-            totalPrice = 0.0;
-        }
-
-        // Display current items
-        public void displayItems() {
-            if (items.isEmpty()) {
-                System.out.println("Your order is empty.");
-                return;
-            }
-
-            System.out.println("Items in your order:");
-            for (Object item : items) {
-                System.out.println("- " + item.toString());
-            }
-        }
-
-        //  Calculate total cost of order
-        public double calculateTotal() {
-            double total = 0.0;
-            for (Object item : items) {
-                if (item instanceof Sandwich sandwich) {
-                    total += sandwich.calculateTotal();
-                } else if (item instanceof DrinkPrice drinkPrice) {
-                    total += drinkPrice.getPrice();
-                } else if (item instanceof SideItemPrice sideItemPrice) {
-                    total += sideItemPrice.getPrice();
-                }
-            }
-            this.totalPrice = total;
-            return total;
-        }
-
-
-        public double getTotalPrice() {
-            return totalPrice;
-        }
-
-        public List<Object> getItems() {
-            return items;
-        }
     }
+    // Add items
+    public void addSandwich(Sandwich sandwich) {
+        sandwiches.add(sandwich);
+    }
+
+    public void addSide(SideItem side) {
+        sideItems.add(side);
+    }
+
+    public void addDrink(Drink drink) {
+        drinks.add(drink);
+    }
+    // Remove all items (for cancel)
+    public void removeAll() {
+        sandwiches.clear();
+        sideItems.clear();
+        drinks.clear();
+    }
+    // Display current items
+    public void displayItems() {
+        if (sandwiches.isEmpty() && sideItems.isEmpty() && drinks.isEmpty()) {
+            System.out.println("Your order is empty.");
+            return;
+        }
+
+        System.out.println("Items in your order:");
+
+        for (Sandwich sandwich : sandwiches)
+            System.out.println("- " + sandwich);
+
+        for (SideItem side : sideItems)
+            System.out.println(" " + side);
+
+        for (Drink drink : drinks)
+            System.out.println("- " + drink);
+    }
+    // Calculate total cost
+    public double calculateTotal() {
+        double total = 0.0;
+
+        for (Sandwich sandwich : sandwiches) {
+            total += sandwich.calculateTotal();
+        }
+        for (SideItem side : sideItems) {
+            total += side.getPrice();
+        }
+        for (Drink drink : drinks) {
+            DrinkPrice drinkPrice = new DrinkPrice(drink);
+            total += drinkPrice.getPrice();
+        }
+        return total;
+
+     }
+
+    }
+
+
+
+
 
 

@@ -10,11 +10,6 @@ public class BreadSizePrice {
 
         this.size = size;
     }
-
-    public BreadSizePrice() {
-
-    }
-
     public BreadSize getSize() {
         return size;
     }

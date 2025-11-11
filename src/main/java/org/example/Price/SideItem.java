@@ -1,20 +1,18 @@
 package org.example.Price;
 
-import org.example.Enum.SideItem;
+public class SideItem {
+    private org.example.Enum.SideItem side;
 
-public class SideItemPrice {
-    private SideItem side;
-
-    public SideItemPrice(SideItem side) {
+    public SideItem(org.example.Enum.SideItem side) {
         this.side = side;
 
     }
 
-    public SideItem getSide() {
+    public org.example.Enum.SideItem getSide() {
         return side;
     }
 
-    public void setSide(SideItem side) {
+    public void setSide(org.example.Enum.SideItem side) {
         this.side = side;
     }
     public double getPrice() {

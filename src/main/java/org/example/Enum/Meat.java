@@ -8,4 +8,6 @@ public enum Meat {
     CHICKEN,
     BACON,
     EXTRA_MEAT,
+    ;
+
 }

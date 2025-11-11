@@ -1,7 +1,6 @@
 package org.example;
 
-import org.example.Enum.BreadType;
-import org.example.Enum.BreadSize;
+import org.example.Enum.*;
 import org.example.Price.BreadSizePrice;
 
 import java.util.List;
@@ -9,14 +8,13 @@ import java.util.List;
 public class Sandwich {
     private BreadSize breadSize;
     private BreadType breadType;
-    private List<String> meats;
-    private List<String> cheeses;
-    private List<String> regularToppings;
-    private List<String> sauces;
+    private List<Meat> meats;
+    private List<Cheese> cheeses;
+    private List<Topping> regularToppings;
+    private List<SideItem> sauces;
     private boolean toasted;
 
-    public Sandwich(BreadSize breadSize, BreadType breadType, List<String> meats,
-                    List<String> cheeses, List<String> regularToppings, List<String> sauces, boolean toasted) {
+    public Sandwich(BreadSize breadSize, BreadType breadType, List<Meat> meats, List<Cheese> cheeses, List<Topping> regularToppings, List<SideItem> sauces, boolean toasted) {
         this.breadSize = breadSize;
         this.breadType = breadType;
         this.meats = meats;
@@ -26,11 +24,11 @@ public class Sandwich {
         this.toasted = toasted;
     }
 
-    public BreadSize getSize() {
+    public BreadSize getBreadSize() {
         return breadSize;
     }
 
-    public void setSize(BreadSize breadSize) {
+    public void setBreadSize(BreadSize breadSize) {
         this.breadSize = breadSize;
     }
 
@@ -42,35 +40,35 @@ public class Sandwich {
         this.breadType = breadType;
     }
 
-    public List<String> getMeats() {
+    public List<Meat> getMeats() {
         return meats;
     }
 
-    public void setMeats(List<String> meats) {
+    public void setMeats(List<Meat> meats) {
         this.meats = meats;
     }
 
-    public List<String> getCheeses() {
+    public List<Cheese> getCheeses() {
         return cheeses;
     }
 
-    public void setCheeses(List<String> cheeses) {
+    public void setCheeses(List<Cheese> cheeses) {
         this.cheeses = cheeses;
     }
 
-    public List<String> getRegularToppings() {
+    public List<Topping> getRegularToppings() {
         return regularToppings;
     }
 
-    public void setRegularToppings(List<String> regularToppings) {
+    public void setRegularToppings(List<Topping> regularToppings) {
         this.regularToppings = regularToppings;
     }
 
-    public List<String> getSauces() {
+    public List<SideItem> getSauces() {
         return sauces;
     }
 
-    public void setSauces(List<String> sauces) {
+    public void setSauces(List<SideItem> sauces) {
         this.sauces = sauces;
     }
 
@@ -81,40 +79,37 @@ public class Sandwich {
     public void setToasted(boolean toasted) {
         this.toasted = toasted;
     }
-    public void addMeat(String meat) {
+
+    public void addMeat(Meat meat) {
         meats.add(meat);
     }
-    public void addCheese(String cheese) {
+    public void addCheese(Cheese cheese) {
         cheeses.add(cheese);
     }
-    public void addTopping(String topping) {
+
+
+    public void addTopping(Topping topping) {
         regularToppings.add(topping);
     }
-    public void addSauce(String sauce) {
+    public void addSauce(SideItem sauce) {
 
         sauces.add(sauce);
     }
     public double calculateTotal() {
-       BreadSizePrice breadSizePrice = new BreadSizePrice();
+        BreadSizePrice breadSizePrice = new BreadSizePrice();
         double total = breadSizePrice.getPrice();
         total += meats.size() * 1.00;// add $1 per meat
         total += cheeses.size() * 0.75; // add $0.75 per cheese
+        total += regularToppings.size() * 0.0;
         return total;
+
     }
 
-    @Override
-    public String toString() {
-        return "Sandwich{" +
-                "size=" + breadSize +
-                ", breadType=" + breadType +
-                ", meats=" + meats +
-                ", cheeses=" + cheeses +
-                ", regularToppings=" + regularToppings +
-                ", sauces=" + sauces +
-                ", toasted=" + toasted +
-                '}';
     }
 
 
 
-}
+
+
+
+
