@@ -2,10 +2,11 @@ package org.example;
 
 import org.example.Enum.BreadType;
 import org.example.Enum.BreadSize;
+import org.example.Price.BreadSizePrice;
 
 import java.util.List;
 
-public class Sandwich {
+public abstract class Sandwich {
     private BreadSize breadSize;
     private BreadType breadType;
     private List<String> meats;
@@ -90,12 +91,13 @@ public class Sandwich {
         regularToppings.add(topping);
     }
     public void addSauce(String sauce) {
+
         sauces.add(sauce);
     }
-    public double calculatePrice() {
-        BreadSizePrice breadSizePrice = new BreadSizePrice(getSize());
+    public double getPrice() {
+       BreadSizePrice breadSizePrice = new BreadSizePrice();
         double total = breadSizePrice.getPrice();
-        total += meats.size() * 1.00; // add $1 per meat
+        total += meats.size() * 1.00;// add $1 per meat
         total += cheeses.size() * 0.75; // add $0.75 per cheese
         return total;
     }
@@ -112,4 +114,7 @@ public class Sandwich {
                 ", toasted=" + toasted +
                 '}';
     }
+
+
+
 }

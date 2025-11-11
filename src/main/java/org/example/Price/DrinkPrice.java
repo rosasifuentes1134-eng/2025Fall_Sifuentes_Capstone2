@@ -1,6 +1,5 @@
-package org.example;
+package org.example.Price;
 
-import org.example.Enum.BreadSize;
 import org.example.Enum.Drink;
 
 
@@ -38,4 +37,7 @@ public class DrinkPrice {
         }
         return price;
     }
-}
+
+
+    }
+

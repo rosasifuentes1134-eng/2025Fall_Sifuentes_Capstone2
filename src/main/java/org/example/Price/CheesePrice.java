@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Price;
 
 import org.example.Enum.Cheese;
 

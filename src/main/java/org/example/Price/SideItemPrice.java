@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Price;
 
 import org.example.Enum.SideItem;
 
@@ -30,6 +30,8 @@ public class SideItemPrice {
                 return 0;
         }
 
+
     }
+
 }
 

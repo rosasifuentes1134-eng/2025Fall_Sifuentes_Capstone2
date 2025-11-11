@@ -1,15 +1,18 @@
-package org.example;
+package org.example.Price;
 
 
 import org.example.Enum.BreadSize;
-
-import static org.example.Enum.BreadSize.*;
 
 public class BreadSizePrice {
     private BreadSize size;
 
     public BreadSizePrice(BreadSize size) {
+
         this.size = size;
+    }
+
+    public BreadSizePrice() {
+
     }
 
     public BreadSize getSize() {
