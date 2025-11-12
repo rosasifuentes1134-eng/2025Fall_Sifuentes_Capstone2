@@ -149,15 +149,13 @@ public class UserInterface {
     public void processAddDrinkRequest(){
         String drink = scanner.nextLine();
 
-        System.out.println("Choose drink size:");
-        System.out.println("""
-                SMALL
-                MEDIUM
-                LARGE
-                """);
+        System.out.println("Choose drink size(SMALL / MEDIUM / LARGE");
+        System.out.println("drink price");
+        System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Drink", 2.00, 2.50, 3.00);
 
     }
     public void processAddChipsRequest(){
+        System.out.println("Add chips(yes/no)");
         boolean chips = scanner.nextLine().equalsIgnoreCase("yes");
 
     }
