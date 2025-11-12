@@ -99,7 +99,7 @@ public class Sandwich {
         sideItems.add(sideItem);
     }
     public double calculateTotal() {
-        double total = 0.0;
+        double total = 0;
 
         // Bread price
         BreadSizePrice breadSizePrice = new BreadSizePrice(breadSize);

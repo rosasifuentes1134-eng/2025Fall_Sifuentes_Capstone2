@@ -20,6 +20,31 @@ public class Order {
         drinks = new ArrayList<>();
 
     }
+
+    public List<Sandwich> getSandwiches() {
+        return sandwiches;
+    }
+
+    public void setSandwiches(List<Sandwich> sandwiches) {
+        this.sandwiches = sandwiches;
+    }
+
+    public List<DrinkPrice> getDrinks() {
+        return new ArrayList<>();
+    }
+
+    public void setDrinks(List<Drink> drinks) {
+        this.drinks = drinks;
+    }
+
+    public List<SideItem> getSideItems() {
+        return sideItems;
+    }
+
+    public void setSideItems(List<SideItem> sideItems) {
+        this.sideItems = sideItems;
+    }
+
     // Add items
     public void addSandwich(Sandwich sandwich) {
         sandwiches.add(sandwich);
@@ -55,6 +80,7 @@ public class Order {
 
         for (Drink drink : drinks)
             System.out.println("- " + drink);
+
     }
     // Calculate total cost
     public double calculateTotal() {
@@ -74,7 +100,15 @@ public class Order {
 
      }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "sandwiches=" + sandwiches +
+                ", sideItems=" + sideItems +
+                ", drinks=" + drinks +
+                '}';
     }
+}
 
 
 

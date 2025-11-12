@@ -6,9 +6,11 @@ import org.example.Enum.Drink;
 
 public class DrinkPrice {
     private Drink size;
+    private Drink drink;
 
     public DrinkPrice(Drink size) {
         this.size = size;
+        this.drink = drink;
     }
 
     public Drink getSize() {
@@ -16,7 +18,16 @@ public class DrinkPrice {
     }
 
     public void setSize(Drink size) {
+
         this.size = size;
+    }
+
+    public Drink getDrink() {
+        return drink;
+    }
+
+    public void setDrink(Drink drink) {
+        this.drink = drink;
     }
 
     public double getPrice(){

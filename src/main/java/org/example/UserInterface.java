@@ -5,18 +5,16 @@ import java.util.Scanner;
 
 public class UserInterface {
     static Scanner scanner = new Scanner(System.in);
-    private Sandwich sandwich;
+    private Order order;
 
-    public UserInterface() {
-        init();
-    }
+    //public void displayOrder(){}
 
     private void init() {
-        //  FileManager fileManager = FileManager();
-        //  this.sandwich = fileManager.getSandwich;
+
     }
 
     public void display() {
+        init();
         boolean isDisplayRunning = true;
 
 
@@ -51,7 +49,7 @@ public class UserInterface {
     }
 
     public void processGetMakeAnOrderRequest() {
-        //Order order = new Order();
+        Order order = new Order();
         boolean isRunning = true;
 
         while (isRunning) {
@@ -80,10 +78,10 @@ public class UserInterface {
                     processAddChipsRequest();
                     break;
                 case "4":
-                    processCheckoutRequest();
+                    processCheckoutRequest(order);
                     break;
                 case "5":
-                    processCancelOrderRequest();
+                    processCancelOrderRequest(order);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -104,6 +102,9 @@ public class UserInterface {
 
         String bread = scanner.nextLine();
 
+        System.out.println("Would you like your bread toasted? (yes/no)");
+        boolean toasted = scanner.nextLine().equalsIgnoreCase("yes");
+
         System.out.println("Choose meat type (STEAK / HAM / SALAMI / ROAST BEEF / CHICKEN / BACON):");
         System.out.println("Meat Prices");
         System.out.printf("%-12s %8s %8s %8s%n", "Type", "4\"", "8\"", "12\"");
@@ -112,61 +113,96 @@ public class UserInterface {
         String meat = scanner.nextLine();
 
         System.out.println("Add extra meat? (yes/no)");
+        System.out.println("Choose meat type (STEAK / HAM / SALAMI / ROAST BEEF / CHICKEN / BACON):");
         System.out.println("Extra meat price");
         System.out.printf("%-12s %8s %8s %8s%n", "Extra", "4\"", "8\"", "12\"");
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Extra Meat", 0.50, 1.00, 1.50);
         boolean extraMeat = scanner.nextLine().equalsIgnoreCase("yes");
 
-        System.out.println("Add cheese? (yes/no)");
-        System.out.println("Choose cheese type (AMERICAN / PROVOLONE / CHEDDAR / SWISS");
+        System.out.println("Choose cheese type (AMERICAN / PROVOLONE / CHEDDAR / SWISS):");
         System.out.println("Cheese price");
         System.out.printf("%-12s %8s %8s %8s%n", "Type", "4\"", "8\"", "12\"");
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Cheese", 0.75, 1.50, 2.50);
-        boolean cheese = scanner.nextLine().equalsIgnoreCase("yes");
+        String cheese = scanner.nextLine();
 
         System.out.println("Add extra cheese? (yes/no)");
+        System.out.println("Choose cheese type (AMERICAN / PROVOLONE / CHEDDAR / SWISS):");
         System.out.println("Extra cheese price");
         System.out.printf("%-12s %8s %8s %8s%n", "Extra", "4\"", "8\"", "12\"");
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Extra Cheese", 0.50, 1.00, 1.50);
         boolean extraCheese = scanner.nextLine().equalsIgnoreCase("yes");
 
         System.out.println("Add toppings:");
-        System.out.println("Choose topping (LETTUCE / PEPPERS / ONIONS / TOMATOES / JALAPENOS / CUCUMBERS / PICKLES / GUACAMOLE / MUSHROOMS");
+        System.out.println("Choose topping (LETTUCE / PEPPERS / ONIONS / TOMATOES / JALAPENOS / CUCUMBERS / PICKLES / GUACAMOLE / MUSHROOMS)");
         String toppings = scanner.nextLine();
 
         System.out.println("Add sauces:");
-        System.out.println("Choose sauce (MAYO / MUSTARD / KETCHUP / RANCH / THOUSAND ISLANDS / VINAIGRETTE");
+        System.out.println("Choose sauce (MAYO / MUSTARD / KETCHUP / RANCH / THOUSAND ISLANDS / VINAIGRETTE)");
         String sauces = scanner.nextLine();
 
-        System.out.println("Would you like your bread toasted? (yes/no)");
-        boolean toasted = scanner.nextLine().equalsIgnoreCase("yes");
-
-        //Sandwich sandwich = new Sandwich();
+        Order order = new Order();
+        ReceiptFileManager.saveOrder(order);
 
 
-        System.out.println("Added " + size + " " + meat + " sandwich to your order.");
+        //System.out.println("Added " + size + " " + meat + " sandwich to your order.");
     }
-    public void processAddDrinkRequest(){
-        String drink = scanner.nextLine();
+
+    public void processAddDrinkRequest() {
+
 
         System.out.println("Choose drink size(SMALL / MEDIUM / LARGE");
         System.out.println("drink price");
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Drink", 2.00, 2.50, 3.00);
 
+        System.out.println("Drink added");
+        String drink = scanner.nextLine();
+
     }
-    public void processAddChipsRequest(){
+
+    public void processAddChipsRequest() {
         System.out.println("Add chips(yes/no)");
+
+        System.out.println("Chips added");
         boolean chips = scanner.nextLine().equalsIgnoreCase("yes");
 
     }
-    public void processCheckoutRequest(){
+
+    public void processCheckoutRequest(Order currentOrder) {
+        System.out.println("\nProcessing checkout...");
+
+
+        currentOrder.displayItems();
+        double total = currentOrder.calculateTotal();
+        System.out.printf("Total: $%.2f%n", total);
+
+        //Pass the order and indicate it’s not cancelled
+        //ReceiptFileManager.saveOrder(order);
+
+
+        // currentOrder.removeAll();
+        System.out.println("Checkout complete. Thank you for your order!\n");
+    }
+
+    public void processCancelOrderRequest(Order currentOrder) {
+        System.out.println("\nCancelling order...");
+
+        if (currentOrder.getSandwiches().isEmpty() &&
+                currentOrder.getSideItems().isEmpty() &&
+                currentOrder.getDrinks().isEmpty()) {
+            System.out.println("There’s nothing to cancel — your order is empty.");
+            return;
+        }
+
+        // Just call your FileManager cancel method
+       ReceiptFileManager.saveOrder(order);
+
+        currentOrder.removeAll();
+        System.out.println("Your order has been cancelled.\n");
+
 
     }
-    public void processCancelOrderRequest(){
-
-    }
 
 
+}
 
-    }
 
