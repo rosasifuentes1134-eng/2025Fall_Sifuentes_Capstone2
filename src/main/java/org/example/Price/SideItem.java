@@ -1,18 +1,20 @@
 package org.example.Price;
 
-public class SideItem {
-    private org.example.Enum.SideItem side;
+import org.example.Enum.SideItems;
 
-    public SideItem(org.example.Enum.SideItem side) {
+public class SideItem {
+    private SideItems side;
+
+    public SideItem(SideItems side) {
         this.side = side;
 
     }
 
-    public org.example.Enum.SideItem getSide() {
+    public SideItems getSide() {
         return side;
     }
 
-    public void setSide(org.example.Enum.SideItem side) {
+    public void setSide(SideItems side) {
         this.side = side;
     }
     public double getPrice() {
@@ -29,6 +31,10 @@ public class SideItem {
         }
 
 
+
+    }
+    public double chips(){
+        return 1.50;
     }
 
 }

@@ -2,6 +2,9 @@ package org.example;
 
 import org.example.Enum.*;
 import org.example.Price.BreadSizePrice;
+import org.example.Price.CheesePrice;
+import org.example.Price.MeatPrice;
+import org.example.Price.SideItem;
 
 import java.util.List;
 
@@ -11,16 +14,16 @@ public class Sandwich {
     private List<Meat> meats;
     private List<Cheese> cheeses;
     private List<Topping> regularToppings;
-    private List<SideItem> sauces;
+    private List<SideItems> sideItems;
     private boolean toasted;
 
-    public Sandwich(BreadSize breadSize, BreadType breadType, List<Meat> meats, List<Cheese> cheeses, List<Topping> regularToppings, List<SideItem> sauces, boolean toasted) {
+    public Sandwich(BreadSize breadSize, BreadType breadType, List<Meat> meats, List<Cheese> cheeses, List<Topping> regularToppings, List<SideItems> sideItems, boolean toasted) {
         this.breadSize = breadSize;
         this.breadType = breadType;
         this.meats = meats;
         this.cheeses = cheeses;
         this.regularToppings = regularToppings;
-        this.sauces = sauces;
+        this.sideItems = sideItems;
         this.toasted = toasted;
     }
 
@@ -64,12 +67,12 @@ public class Sandwich {
         this.regularToppings = regularToppings;
     }
 
-    public List<SideItem> getSauces() {
-        return sauces;
+    public List<SideItems> getSideItems() {
+        return sideItems;
     }
 
-    public void setSauces(List<SideItem> sauces) {
-        this.sauces = sauces;
+    public void setSauces(List<SideItems> sideItems) {
+        this.sideItems = sideItems;
     }
 
     public boolean isToasted() {
@@ -91,21 +94,55 @@ public class Sandwich {
     public void addTopping(Topping topping) {
         regularToppings.add(topping);
     }
-    public void addSauce(SideItem sauce) {
+    public void addSideItem(SideItems sideItem) {
 
-        sauces.add(sauce);
+        sideItems.add(sideItem);
     }
     public double calculateTotal() {
-        BreadSizePrice breadSizePrice = new BreadSizePrice();
-        double total = breadSizePrice.getPrice();
-        total += meats.size() * 1.00;// add $1 per meat
-        total += cheeses.size() * 0.75; // add $0.75 per cheese
-        total += regularToppings.size() * 0.0;
+        double total = 0.0;
+
+        // Bread price
+        BreadSizePrice breadSizePrice = new BreadSizePrice(breadSize);
+        total += breadSizePrice.getPrice();
+
+        // Meat prices
+        for (Meat meat : meats) {
+            MeatPrice meatPrice = new MeatPrice(meat);
+            total += meatPrice.getPrice();
+        }
+
+        // Cheese prices
+        for (Cheese cheese : cheeses) {
+            CheesePrice cheesePrice = new CheesePrice(cheese);
+            total += cheesePrice.getPrice();
+        }
+
+        // Toppings and sauces
+       // for (Topping topping : regularToppings) {
+        //    total += topping.getPrice();
+       // }
+
+        for (SideItems sideItems : sideItems) {
+            SideItem sideItem = new SideItem(sideItems);
+            total += sideItem.getPrice();
+        }
         return total;
 
     }
 
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "breadSize=" + breadSize +
+                ", breadType=" + breadType +
+                ", meats=" + meats +
+                ", cheeses=" + cheeses +
+                ", regularToppings=" + regularToppings +
+                ", sideItems=" + sideItems +
+                ", toasted=" + toasted +
+                '}';
     }
+}
 
 
 

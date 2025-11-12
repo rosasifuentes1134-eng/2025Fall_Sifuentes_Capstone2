@@ -1,9 +1,10 @@
 package org.example.Enum;
 
-public enum SideItem {
+public enum SideItems {
     CHIPS,
     AU_JUS,
     SAUCE;
+
 
 
 }
