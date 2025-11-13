@@ -76,14 +76,25 @@ public class Order {
 
         System.out.println("Items in your order:");
 
-        for (Sandwich sandwich : sandwiches)
-            System.out.println("- " + sandwich);
+        for (Sandwich sandwich : sandwiches) {
+            System.out.printf("- Sandwich: %s %s | $%.2f%n",
+                    sandwich.getBreadSize(),
+                    sandwich.getBreadType(),
+                    sandwich.calculateTotal());
+        }
 
-        for (SideItem side : sideItems)
-            System.out.println(" " + side);
+        for (SideItem side : sideItems) {
+            System.out.printf("- Side: %s | $%.2f%n",
+                    side.getSide(),
+                    side.getPrice());
+        }
 
-        for (Drink drink : drinks)
-            System.out.println("- " + drink);
+        for (Drink drink : drinks) {
+            DrinkPrice drinkPrice = new DrinkPrice(drink);
+            System.out.printf("- Drink: %s | $%.2f%n",
+                    drink,
+                    drinkPrice.getPrice());
+        }
 
     }
     // Calculate total cost
@@ -138,11 +149,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "sandwiches=" + sandwiches +
-                ", sideItems=" + sideItems +
-                ", drinks=" + drinks +
-                '}';
+        return "Order" +
+                "sandwiches =" + sandwiches +
+                ", sideItems =" + sideItems +
+                ", drinks =" + drinks ;
     }
 }
 

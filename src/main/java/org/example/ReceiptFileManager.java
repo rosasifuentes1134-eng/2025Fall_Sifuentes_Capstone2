@@ -15,14 +15,10 @@ public class ReceiptFileManager {
 
 
         public static void saveOrder (Order order){
-            //List<Order>order = new ArrayList<>();
 
             try{
             FileWriter fw = new FileWriter("src/main/resources/receipt.csv",true);
             BufferedWriter writer = new BufferedWriter(fw);
-
-
-
 
                 // Write sandwiches
                 for (Sandwich sandwich : order.getSandwiches()) {

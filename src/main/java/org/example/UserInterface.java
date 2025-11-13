@@ -150,6 +150,8 @@ public class UserInterface {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("Add toppings:");
         System.out.println("Choose topping (LETTUCE / PEPPERS / ONIONS / TOMATOES / JALAPENOS / CUCUMBERS / PICKLES / GUACAMOLE / MUSHROOMS)");
+
+
         String toppings = scanner.nextLine();
 
         System.out.println("\n" + "=".repeat(50));
@@ -244,6 +246,26 @@ public class UserInterface {
             currentOrder.displayItems();
             double total = currentOrder.calculateTotal();
             System.out.printf("Total: $%.2f%n", total);
+
+            // Ask for confirmation
+            System.out.println("Would you like to:");
+            System.out.println("1) Confirm ");
+            System.out.println("2) Cancel ");
+
+            String choice = scanner.nextLine().trim();  // Add .trim() here
+
+            if (choice.equals("1")) {
+                // Confirm - save receipt and complete checkout
+                currentOrder.printReceipt();
+                ReceiptFileManager.saveOrder(currentOrder);
+                System.out.println("Checkout complete. Thank you for your order!\n");
+            } else if (choice.equals("2")) {
+                // Cancel - delete order without saving
+                currentOrder.removeAll();
+                System.out.println("Order cancelled. Returning to home screen.\n");
+            } else {
+                System.out.println("Invalid choice. Returning to order menu.\n");
+            }
 
             //Pass the order and indicate it’s not cancelled
             currentOrder.printReceipt();

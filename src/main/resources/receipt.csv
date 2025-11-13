@@ -21,3 +21,30 @@ Side | CHIPS | - | 1.50
 Drink | MEDIUM | - | 2.50
 Total: $15.00
 
+Sandwich | EIGHT_INCH WHITE  | Meats: [ROAST_BEEF] | Cheeses: [PROVOLONE] | Toppings: [LETTUCE] | 8.75
+Side | CHIPS | - | 1.50
+Drink | MEDIUM | - | 2.50
+Total: $12.75
+
+Sandwich | FOUR_INCH WHEAT  | Meats: [STEAK, STEAK] | Cheeses: [CHEDDAR] | Toppings: [LETTUCE] | 8.25
+Total: $8.25
+
+Sandwich | FOUR_INCH WHITE  | Meats: [STEAK] | Cheeses: [AMERICAN] | Toppings: [LETTUCE] | 7.25
+Total: $7.25
+
+Drink | LARGE | - | 3.00
+Total: $3.00
+
+Drink | LARGE | - | 3.00
+Total: $3.00
+
+Sandwich | EIGHT_INCH WHEAT  | Meats: [STEAK] | Cheeses: [AMERICAN] | Toppings: [LETTUCE] | 8.75
+Side | CHIPS | - | 1.50
+Drink | MEDIUM | - | 2.50
+Total: $12.75
+
+Sandwich | EIGHT_INCH WHEAT  | Meats: [STEAK] | Cheeses: [AMERICAN] | Toppings: [LETTUCE] | 8.75
+Side | CHIPS | - | 1.50
+Drink | MEDIUM | - | 2.50
+Total: $12.75
+
