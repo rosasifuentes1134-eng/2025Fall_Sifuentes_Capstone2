@@ -25,7 +25,7 @@ public class UserInterface {
 
         String userInput = null;
         while (isDisplayRunning) {
-
+            System.out.println("\n" + "=".repeat(50));
             System.out.println("""
                     Welcome to my Deli Shop
                     Please choose an option:
@@ -58,6 +58,7 @@ public class UserInterface {
         boolean isRunning = true;
 
         while (isRunning) {
+            System.out.println("\n"+ "=".repeat(50));
             System.out.println("""
                     1) Add Sandwich
                     2) Add Drink
@@ -99,10 +100,11 @@ public class UserInterface {
     }
 
     public void processAddSandwichRequest() {
-
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Choose sandwich size (FOUR_INCH / EIGHT_INCH / TWELVE_INCH):");
         String size = scanner.nextLine();
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Choose bread type (WHITE / WHEAT / RYE / WRAP):");
         System.out.println("Sandwich Prices");
         System.out.printf("%-10s %8s %8s %8s%n", "Type", "4\"", "8\"", "12\"");
@@ -110,9 +112,11 @@ public class UserInterface {
 
         String bread = scanner.nextLine();
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Would you like your bread toasted? (yes/no)");
         boolean toasted = scanner.nextLine().equalsIgnoreCase("yes");
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Choose meat type (STEAK / HAM / SALAMI / ROAST BEEF / CHICKEN / BACON):");
         System.out.println("Meat Prices");
         System.out.printf("%-12s %8s %8s %8s%n", "Type", "4\"", "8\"", "12\"");
@@ -120,6 +124,7 @@ public class UserInterface {
 
         String meat = scanner.nextLine();
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Add extra meat? (yes/no)");
         System.out.println("Choose meat type (STEAK / HAM / SALAMI / ROAST BEEF / CHICKEN / BACON):");
         System.out.println("Extra meat price");
@@ -127,12 +132,14 @@ public class UserInterface {
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Extra Meat", 0.50, 1.00, 1.50);
         boolean extraMeat = scanner.nextLine().equalsIgnoreCase("yes");
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Choose cheese type (AMERICAN / PROVOLONE / CHEDDAR / SWISS):");
         System.out.println("Cheese price");
         System.out.printf("%-12s %8s %8s %8s%n", "Type", "4\"", "8\"", "12\"");
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Cheese", 0.75, 1.50, 2.50);
         String cheese = scanner.nextLine();
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Add extra cheese? (yes/no)");
         System.out.println("Choose cheese type (AMERICAN / PROVOLONE / CHEDDAR / SWISS):");
         System.out.println("Extra cheese price");
@@ -140,10 +147,12 @@ public class UserInterface {
         System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Extra Cheese", 0.50, 1.00, 1.50);
         boolean extraCheese = scanner.nextLine().equalsIgnoreCase("yes");
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Add toppings:");
         System.out.println("Choose topping (LETTUCE / PEPPERS / ONIONS / TOMATOES / JALAPENOS / CUCUMBERS / PICKLES / GUACAMOLE / MUSHROOMS)");
         String toppings = scanner.nextLine();
 
+        System.out.println("\n" + "=".repeat(50));
         System.out.println("Add sauces:");
         System.out.println("Choose sauce (MAYO / MUSTARD / KETCHUP / RANCH / THOUSAND ISLANDS / VINAIGRETTE)");
         String sauces = scanner.nextLine();
@@ -195,8 +204,7 @@ public class UserInterface {
         }
     }
         public void processAddDrinkRequest () {
-
-
+            System.out.println("\n" + "=".repeat(50));
             System.out.println("Choose drink size(SMALL / MEDIUM / LARGE");
             System.out.println("drink price");
             System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Drink", 2.00, 2.50, 3.00);
@@ -214,6 +222,7 @@ public class UserInterface {
         }
 
         public void processAddChipsRequest () {
+            System.out.println("\n" + "=".repeat(50));
             System.out.println("Add chips(yes/no)");
             boolean answer = scanner.nextLine().equalsIgnoreCase("yes");
 
@@ -228,6 +237,7 @@ public class UserInterface {
         }
 
         public void processCheckoutRequest (Order currentOrder){
+            System.out.println("\n" + "=".repeat(50));
             System.out.println("\nProcessing checkout...");
 
 
@@ -245,6 +255,7 @@ public class UserInterface {
         }
 
         public void processCancelOrderRequest (Order currentOrder){
+            System.out.println("\n" + "=".repeat(50));
             System.out.println("\nCancelling order...");
 
             if (currentOrder.getSandwiches().isEmpty() &&

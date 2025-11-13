@@ -6,3 +6,18 @@ Side | CHIPS | - | 1.50
 Drink | SMALL | - | 2.00
 Total: $12.25
 
+Sandwich | FOUR_INCH WHITE  | Meats: [SALAMI] | Cheeses: [PROVOLONE] | Toppings: [TOMATOES] | 7.25
+Side | CHIPS | - | 1.50
+Drink | MEDIUM | - | 2.50
+Total: $11.25
+
+Sandwich | TWELVE_INCH RYE  | Meats: [ROAST_BEEF, ROAST_BEEF] | Cheeses: [CHEDDAR, CHEDDAR] | Toppings: [LETTUCE] | 12.00
+Side | CHIPS | - | 1.50
+Drink | SMALL | - | 2.00
+Total: $15.50
+
+Sandwich | TWELVE_INCH WHITE  | Meats: [HAM] | Cheeses: [SWISS, SWISS] | Toppings: [ONIONS] | 11.00
+Side | CHIPS | - | 1.50
+Drink | MEDIUM | - | 2.50
+Total: $15.00
+
