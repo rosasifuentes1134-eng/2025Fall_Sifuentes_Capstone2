@@ -14,16 +14,14 @@ public class Sandwich {
     private List<Meat> meats;
     private List<Cheese> cheeses;
     private List<Topping> regularToppings;
-    private List<SideItems> sideItems;
     private boolean toasted;
 
-    public Sandwich(BreadSize breadSize, BreadType breadType, List<Meat> meats, List<Cheese> cheeses, List<Topping> regularToppings, List<SideItems> sideItems, boolean toasted) {
+    public Sandwich(BreadSize breadSize, BreadType breadType, List<Meat> meats, List<Cheese> cheeses, List<Topping> regularToppings, boolean toasted) {
         this.breadSize = breadSize;
         this.breadType = breadType;
         this.meats = meats;
         this.cheeses = cheeses;
         this.regularToppings = regularToppings;
-        this.sideItems = sideItems;
         this.toasted = toasted;
     }
 
@@ -65,14 +63,7 @@ public class Sandwich {
 
     public void setRegularToppings(List<Topping> regularToppings) {
         this.regularToppings = regularToppings;
-    }
 
-    public List<SideItems> getSideItems() {
-        return sideItems;
-    }
-
-    public void setSauces(List<SideItems> sideItems) {
-        this.sideItems = sideItems;
     }
 
     public boolean isToasted() {
@@ -86,6 +77,7 @@ public class Sandwich {
     public void addMeat(Meat meat) {
         meats.add(meat);
     }
+
     public void addCheese(Cheese cheese) {
         cheeses.add(cheese);
     }
@@ -94,12 +86,9 @@ public class Sandwich {
     public void addTopping(Topping topping) {
         regularToppings.add(topping);
     }
-    public void addSideItem(SideItems sideItem) {
 
-        sideItems.add(sideItem);
-    }
     public double calculateTotal() {
-        double total = 0;
+        double total = 0.0;
 
         // Bread price
         BreadSizePrice breadSizePrice = new BreadSizePrice(breadSize);
@@ -116,17 +105,8 @@ public class Sandwich {
             CheesePrice cheesePrice = new CheesePrice(cheese);
             total += cheesePrice.getPrice();
         }
-
-        // Toppings and sauces
-       // for (Topping topping : regularToppings) {
-        //    total += topping.getPrice();
-       // }
-
-        for (SideItems sideItems : sideItems) {
-            SideItem sideItem = new SideItem(sideItems);
-            total += sideItem.getPrice();
-        }
         return total;
+
 
     }
 
@@ -138,11 +118,12 @@ public class Sandwich {
                 ", meats=" + meats +
                 ", cheeses=" + cheeses +
                 ", regularToppings=" + regularToppings +
-                ", sideItems=" + sideItems +
                 ", toasted=" + toasted +
                 '}';
     }
 }
+
+
 
 
 

@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.Enum.*;
+import org.example.Price.SideItem;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -49,7 +54,7 @@ public class UserInterface {
     }
 
     public void processGetMakeAnOrderRequest() {
-        Order order = new Order();
+        this.order = new Order();
         boolean isRunning = true;
 
         while (isRunning) {
@@ -58,16 +63,17 @@ public class UserInterface {
                     2) Add Drink
                     3) Add Chips
                     4) Checkout
-                    0) Cancel Order
+                    5) Cancel Order
                     """);
             String userInput = scanner.nextLine();
 
             if (userInput.isBlank()) {
                 System.out.println("Please try again.");
-                return;
+                continue;
             }
 
             switch (userInput) {
+
                 case "1":
                     processAddSandwichRequest();
                     break;
@@ -79,9 +85,11 @@ public class UserInterface {
                     break;
                 case "4":
                     processCheckoutRequest(order);
+                    isRunning = false;
                     break;
                 case "5":
                     processCancelOrderRequest(order);
+                    isRunning = false;
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -140,69 +148,116 @@ public class UserInterface {
         System.out.println("Choose sauce (MAYO / MUSTARD / KETCHUP / RANCH / THOUSAND ISLANDS / VINAIGRETTE)");
         String sauces = scanner.nextLine();
 
-        Order order = new Order();
-        ReceiptFileManager.saveOrder(order);
+        try {
+            // Create empty lists
+            List<Meat> meatList = new ArrayList<>();
+            List<Cheese> cheeseList = new ArrayList<>();
+            List<Topping> toppingList = new ArrayList<>();
+
+            // Add meat to list
+            Meat meatType = Meat.valueOf(meat.toUpperCase().replace(" ", "_"));
+            meatList.add(meatType);
+            if (extraMeat) {
+                meatList.add(meatType); // Add same meat again for extra
+            }
+
+            // Add cheese to list
+            Cheese cheeseType = Cheese.valueOf(cheese.toUpperCase());
+            cheeseList.add(cheeseType);
+            if (extraCheese) {
+                cheeseList.add(cheeseType); // Add same cheese again for extra
+            }
+
+            // Add toppings to list if entered
+            if (!toppings.isBlank()) {
+                Topping topping = Topping.valueOf(toppings.toUpperCase());
+                toppingList.add(topping);
+            }
+
+            // Create sandwich with all the lists
+            Sandwich sandwich = new Sandwich(
+                    BreadSize.valueOf(size.toUpperCase()),
+                    BreadType.valueOf(bread.toUpperCase()),
+                    meatList,
+                    cheeseList,
+                    toppingList,
+                    toasted
+            );
+
+            // ADD TO ORDER
+            order.addSandwich(sandwich);
+
+            System.out.println("Sandwich added successfully!");
 
 
-        //System.out.println("Added " + size + " " + meat + " sandwich to your order.");
+        } catch (Exception e) {
+            System.out.println("Invalid input. sandwich not added:" + e.getMessage());
+        }
     }
-
-    public void processAddDrinkRequest() {
-
-
-        System.out.println("Choose drink size(SMALL / MEDIUM / LARGE");
-        System.out.println("drink price");
-        System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Drink", 2.00, 2.50, 3.00);
-
-        System.out.println("Drink added");
-        String drink = scanner.nextLine();
-
-    }
-
-    public void processAddChipsRequest() {
-        System.out.println("Add chips(yes/no)");
-
-        System.out.println("Chips added");
-        boolean chips = scanner.nextLine().equalsIgnoreCase("yes");
-
-    }
-
-    public void processCheckoutRequest(Order currentOrder) {
-        System.out.println("\nProcessing checkout...");
+        public void processAddDrinkRequest () {
 
 
-        currentOrder.displayItems();
-        double total = currentOrder.calculateTotal();
-        System.out.printf("Total: $%.2f%n", total);
+            System.out.println("Choose drink size(SMALL / MEDIUM / LARGE");
+            System.out.println("drink price");
+            System.out.printf("%-10s %8.2f %8.2f %8.2f%n", "Drink", 2.00, 2.50, 3.00);
 
-        //Pass the order and indicate it’s not cancelled
-        //ReceiptFileManager.saveOrder(order);
+            String size = scanner.nextLine();
 
+            try {
+                Drink drink = Drink.valueOf(size.toUpperCase());
+                order.addDrink(drink);
+                System.out.println("Drink added successfully!");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid drink size: " + e.getMessage());
+            }
 
-        // currentOrder.removeAll();
-        System.out.println("Checkout complete. Thank you for your order!\n");
-    }
-
-    public void processCancelOrderRequest(Order currentOrder) {
-        System.out.println("\nCancelling order...");
-
-        if (currentOrder.getSandwiches().isEmpty() &&
-                currentOrder.getSideItems().isEmpty() &&
-                currentOrder.getDrinks().isEmpty()) {
-            System.out.println("There’s nothing to cancel — your order is empty.");
-            return;
         }
 
-        // Just call your FileManager cancel method
-       ReceiptFileManager.saveOrder(order);
+        public void processAddChipsRequest () {
+            System.out.println("Add chips(yes/no)");
+            boolean answer = scanner.nextLine().equalsIgnoreCase("yes");
 
-        currentOrder.removeAll();
-        System.out.println("Your order has been cancelled.\n");
+            try {
+                SideItem chips = new SideItem(SideItems.CHIPS);
+                order.addSideItem(chips);
+                System.out.println("Chips added successfully!");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid chips type: " + e.getMessage());
+            }
 
+        }
+
+        public void processCheckoutRequest (Order currentOrder){
+            System.out.println("\nProcessing checkout...");
+
+
+            currentOrder.displayItems();
+            double total = currentOrder.calculateTotal();
+            System.out.printf("Total: $%.2f%n", total);
+
+            //Pass the order and indicate it’s not cancelled
+            currentOrder.printReceipt();
+            ReceiptFileManager.saveOrder(currentOrder);
+
+
+            currentOrder.removeAll();
+            System.out.println("Checkout complete. Thank you for your order!\n");
+        }
+
+        public void processCancelOrderRequest (Order currentOrder){
+            System.out.println("\nCancelling order...");
+
+            if (currentOrder.getSandwiches().isEmpty() &&
+                    currentOrder.getSideItems().isEmpty() &&
+                    currentOrder.getDrinks().isEmpty()) {
+                System.out.println("There’s nothing to cancel — your order is empty.");
+                return;
+            }
+            currentOrder.removeAll();
+            System.out.println("Your order has been cancelled.\n");
+        }
 
     }
 
-
-}
 
 

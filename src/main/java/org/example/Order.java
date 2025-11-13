@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Order {
     // These lists hold all the items in the order
+
     private List<Sandwich> sandwiches;
     private List<SideItem> sideItems;
     private List<Drink> drinks;
@@ -29,8 +30,8 @@ public class Order {
         this.sandwiches = sandwiches;
     }
 
-    public List<DrinkPrice> getDrinks() {
-        return new ArrayList<>();
+    public List<Drink> getDrinks() {
+        return drinks;
     }
 
     public void setDrinks(List<Drink> drinks) {
@@ -48,6 +49,9 @@ public class Order {
     // Add items
     public void addSandwich(Sandwich sandwich) {
         sandwiches.add(sandwich);
+    }
+    public void addSideItem(SideItem sideItem){
+        sideItems.add(sideItem);
     }
 
     public void addSide(SideItem side) {
@@ -99,6 +103,38 @@ public class Order {
         return total;
 
      }
+    public void printReceipt() {
+        System.out.println("\n===== ORDER RECEIPT =====");
+
+        // Sandwiches
+        for (Sandwich sandwich : sandwiches) {
+            System.out.println("Sandwich: " +
+                    sandwich.getBreadSize() + " " +
+                    sandwich.getBreadType() + " " +
+                    sandwich.getMeats() + " " +
+                    sandwich.getCheeses() + " " +
+                    sandwich.getRegularToppings() +
+                    " | Price: $" + String.format("%.2f", sandwich.calculateTotal()));
+        }
+
+        // Sides
+        for (SideItem sideItem : sideItems) {
+            System.out.println("Side: " + sideItem.getSide() +
+                    " | Price: $" + String.format("%.2f", sideItem.getPrice()));
+        }
+
+        // Drinks
+        for (Drink drink: getDrinks()) {
+            DrinkPrice drinkPrice = new DrinkPrice(drink);
+            System.out.println("Drink: " + drinkPrice.getSize() +
+                    " | Price: $" + String.format("%.2f", drinkPrice.getPrice()));
+        }
+
+        // Total
+        System.out.println("----------------------------");
+        System.out.println("Total: $" + String.format("%.2f", calculateTotal()));
+        System.out.println("============================\n");
+    }
 
     @Override
     public String toString() {
